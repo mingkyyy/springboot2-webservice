@@ -15,28 +15,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = HelloController.class)
 public class HelloControllerTest {
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mvc; // 빈 생성해줌
 
     @Test
-    public void hello가_리턴된다() throws Exception{
+    public void hello가_리턴된다() throws Exception {
         String hello = "hello";
 
         mvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(hello));
+                .andExpect(status().isOk()) //에러 안 뜸?
+                .andExpect(content().string(hello)); //hello로 리턴 잘 됨?
     }
 
     @Test
-    public void helloDto가_리턴된다() throws Exception{
+    public void helloDto가_리턴된다() throws Exception {
         String name = "hello";
         int amount = 1000;
 
         mvc.perform(get("/hello/dto")
-                .param("name", name)
-                .param("amount", String.valueOf(amount)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is(name)))
-                .andExpect(jsonPath("$.amount",is(amount)));
+                        .param("name", name)
+                        .param("amount", String.valueOf(amount))) //string 형 밖에 못함 무조건 string 형으로 변경해서 해야 함.
+                .andExpect(status().isOk()) // 200 (=에러 없음) 됨???
+                .andExpect(jsonPath("$.name", is(name))) // 생성자 잘 생성해서 생성자 값이랑 맞니?
+                .andExpect(jsonPath("$.amount", is(amount)));
 
 
     }
