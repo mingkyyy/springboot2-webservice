@@ -41,6 +41,8 @@ dependencies {
     // 메모리에서 실행되므로 애플리케이션을 재실행 할 때마다 초기화 된다.
     compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    compile('org.springframework.session:spring-session-jdbc')
 }
 test {
     useJUnitPlatform()
